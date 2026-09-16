@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LockControl } from "@/components/LockControl";
 import { PwaControls } from "@/components/PwaControls";
 
 export function Header() {
@@ -13,7 +14,10 @@ export function Header() {
             Stall Sales
           </span>
         </Link>
-        <PwaControls />
+        <div className="ml-auto flex shrink-0 items-center gap-2">
+          <LockControl />
+          <PwaControls />
+        </div>
       </div>
     </header>
   );

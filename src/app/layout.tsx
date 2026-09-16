@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppDataProvider } from "@/components/AppDataProvider";
+import { AppLockGate } from "@/components/AppLockGate";
 import { Header } from "@/components/Header";
 import { MobileNav } from "@/components/Nav";
-import { AppDataProvider } from "@/components/AppDataProvider";
 import { PwaProvider } from "@/components/PwaProvider";
 import "./globals.css";
 
@@ -51,13 +52,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full overflow-x-hidden bg-background text-foreground">
         <PwaProvider>
-          <div className="flex min-h-dvh flex-col">
-            <Header />
-            <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-32 sm:px-6">
-              <AppDataProvider>{children}</AppDataProvider>
-            </main>
-            <MobileNav />
-          </div>
+          <AppLockGate>
+            <div className="flex min-h-dvh flex-col">
+              <Header />
+              <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-32 sm:px-6">
+                <AppDataProvider>{children}</AppDataProvider>
+              </main>
+              <MobileNav />
+            </div>
+          </AppLockGate>
         </PwaProvider>
       </body>
     </html>
